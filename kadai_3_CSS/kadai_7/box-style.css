@@ -1,0 +1,10 @@
+/*
+課題内容：
+次を満たす .box クラスを作成し、両方の <div> に適用してください。
+背景色：#eeeeee
+フォントサイズ：16px
+*/
+.box{
+    background-color: #eeeeee;
+    font-size: 16px;
+}

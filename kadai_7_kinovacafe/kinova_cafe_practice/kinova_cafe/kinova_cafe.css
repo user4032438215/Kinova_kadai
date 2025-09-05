@@ -1,0 +1,93 @@
+#toggleDarkMode {
+  position: fixed;         /* 画面右上に固定表示 */
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;    /* 内側の余白 */
+  background-color: #333;  /* 背景は濃いグレー */
+  color: white;            /* 文字は白 */
+  border: none;            /* 枠線なし */
+  border-radius: 20px;     /* 丸みのある角 */
+  cursor: pointer;         /* カーソルをポインターに */
+}
+
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.dark-mode header {
+  background-color: #333;
+}
+
+.dark-mode footer {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .menu-description {
+  color: #ddd;
+}
+
+body {
+  background-color: #f9f7f4;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+header {
+  text-align: center;
+  background-color: #fff;
+  padding: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #7b4e2d;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center 75%;
+  display: block;
+}
+
+.menu {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1.3rem;
+  line-height: 2;
+  margin: 1.5rem 0;
+}
+
+.favorite {
+  margin-left: 1rem;
+  font-size: 1.4rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #bbb;
+}
+.favorite.active {
+  color: crimson;
+}
+
+footer {
+  background-color: #ecebe4;
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 2rem 1rem;
+}
+

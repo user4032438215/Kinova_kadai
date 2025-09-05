@@ -1,0 +1,69 @@
+/*.site-header に以下のスタイルを適用する：
+背景色：lightblue
+文字色：white
+padding：20px
+.main-content に以下のスタイルを適用する：
+背景色：white
+padding：20px
+.site-footer に以下のスタイルを適用する：
+背景色：lightgray
+文字色：gray
+padding：10px
+文字の中央寄せ（text-align: center;）*/
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* .hero img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center 75%;
+  display: block;
+} */
+
+.hero img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    object-position: center 30%;
+
+}
+
+.site-header {
+    background-color: lightblue;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+.myname{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.main-content {
+    background-color: white;
+    padding: 20px;
+
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.site-footer {
+    background-color: lightgray;
+    color: gray;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+
+}

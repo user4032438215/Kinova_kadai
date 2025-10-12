@@ -21,8 +21,8 @@
 
 let BIO_CONTENT = "映画やアート、漫画、読書を浅く広く楽しむアウトドアマンです。好きな映画監督：ノーラン、フィンチャー、スコセッシ好きな漫画家：松本大洋、浦沢直樹、新井英樹など好きなアーティスト：シーレ、ワイエス、リヒターなど"
 
-
-function toggleBioEvents(){
+//BioContenttogglebtn
+function toggleBioEvents() {
   const bioButton = document.getElementById("toggleBioBtn");
   const bioContent = document.getElementById("bio");
 
@@ -31,15 +31,43 @@ function toggleBioEvents(){
 
 
   bioButton.addEventListener("click", () => {
-    if(bioButton.textContent == "もっと見る"){
-        bioButton.textContent = "閉じる";
-        bioContent.textContent = BIO_CONTENT;
+    if (bioButton.textContent == "もっと見る") {
+      bioButton.textContent = "閉じる";
+      bioContent.textContent = BIO_CONTENT;
 
-      } else {  
-        bioButton.textContent = "もっと見る";
-        bioContent.textContent = "簡単な自己紹介：映画アート漫画読書好きアウトドアマン";
-      }
-  })
+    } else {
+      bioButton.textContent = "もっと見る";
+      bioContent.textContent = "簡単な自己紹介：映画アート漫画読書好きアウトドアマン";
+    }
+  });
 }
 
+//colorThemebtn
+function colorThemeEvents() {
+  const blueBtn = document.getElementById("themeBlue");
+  const greenBtn = document.getElementById("themeGreen");
+  const pinkBtn = document.getElementById("themePink");
+
+  function removeAllThemes() {
+    document.body.classList.remove("theme-blue", "theme-green", "theme-pink");
+  }
+
+  blueBtn.addEventListener("click", () => {
+    removeAllThemes();
+    document.body.classList.add("theme-blue");
+  });
+
+  greenBtn.addEventListener("click", () => {
+    removeAllThemes();
+    document.body.classList.add("theme-green");
+  });
+
+  pinkBtn.addEventListener("click", () => {
+    removeAllThemes();
+    document.body.classList.add("theme-pink");
+  });
+}
+
+
 toggleBioEvents();
+colorThemeEvents();

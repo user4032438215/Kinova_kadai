@@ -1,28 +1,7 @@
-/*.site-header に以下のスタイルを適用する：
-背景色：lightblue
-文字色：white
-padding：20px
-.main-content に以下のスタイルを適用する：
-背景色：white
-padding：20px
-.site-footer に以下のスタイルを適用する：
-背景色：lightgray
-文字色：gray
-padding：10px
-文字の中央寄せ（text-align: center;）*/
 
 body{
     font-family: 'Josefin Sans', sans-serif;
 }
-
-/* .hero img {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: cover;
-  object-position: center 75%;
-  display: block;
-} */
 
 .hero img {
     width: 100%;
@@ -34,8 +13,8 @@ body{
 }
 
 .site-header {
-    background-color: lightblue;
-    color: white;
+    background-color: lightgray;
+    /* color: white; */
     padding: 20px;
     text-align: center;
 }
@@ -61,9 +40,29 @@ ul {
 
 .site-footer {
     background-color: lightgray;
-    color: gray;
+    /* color: gray; */
     padding: 10px;
     text-align: center;
     margin-top: 20px;
 
+}
+
+.theme-blue {
+  background-color: #e0f0ff;
+  color: #004080;           
+}
+
+.theme-green {
+  background-color: #e6ffe6;
+  color: #006633;              
+}
+
+.theme-pink {
+  background-color: #ffe6f0;   
+  color: #cc0066;              
+}
+
+/* ボタンの文字色はブラウザのデフォルトで設定されているので無理やり継承させる */
+button {
+  color: inherit;
 }

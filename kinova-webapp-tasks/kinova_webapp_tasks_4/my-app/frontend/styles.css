@@ -1,0 +1,13 @@
+label {
+  display: block;
+  margin-top: 8px;
+}
+
+input, textarea {
+  display: block;
+  margin-top: 4px;
+}
+
+button {
+  margin-top: 12px;
+}

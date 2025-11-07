@@ -22,19 +22,20 @@ CREATE TABLE users (
 );
 ```
 Node.jsで pg パッケージをインストールする → npm install pg 済
-index.js に PostgreSQL接続設定を書く（Poolを使う） まだ
+index.js に PostgreSQL接続設定を書く（Poolを使う） 済
 ---
 2. ## Create（データ追加）
 やること
-APIに /api/users のPOSTルートを作る
-req.body から name と message を受け取る
+APIに /api/users のPOSTルートを作る 済
+req.body から name と message を受け取る 済 >分割代入でコンパクトに記述
 SQLで INSERT INTO users (name, message) を実行
 プレースホルダ $1, $2 を使って安全に書く
 ```js
 const sql = "INSERT INTO users (name, message) VALUES ($1, $2)";
 pool.query(sql, [name, message])
 ```
-フロントにフォームを作って、fetch() でPOST送信する
+フロントにフォームを作って、fetch() でPOST送信する 済 11/08/01:36 
+**次回は『Read（データの取得）』から**
 
 3. ## Read（データ取得）
 やること

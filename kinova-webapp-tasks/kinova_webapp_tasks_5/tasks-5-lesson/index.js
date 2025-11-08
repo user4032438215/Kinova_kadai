@@ -11,18 +11,15 @@ const pool = new Pool({
   user: "postgres",       // PostgreSQLのユーザー名
   host: "localhost",      // サーバーの場所（ローカルなら localhost）
   database: "lesson_5_sample",   // データベース名
-  password: "AAhiCyHh", // インストール時に設定したパスワード。 .envファイルに分けてrequire("dotenv").config(); で読み込む。じゃないと多分やばい
+  password: "19990120", // インストール時に設定したパスワード。 .envファイルに分けてrequire("dotenv").config(); で読み込む。じゃないと多分やばい
   port: 5432              // デフォルトのポート番号
 });
 
 const PORT = 3000;
-
-
-
 app.use(express.json());//ミドルウェア
 app.use(cors()); // ← これで全オリジンからのアクセスを許可
 // node index.js というコマンドでサーバーを起動。『Ctrl+C』でサーバーを停止
-app.listen(PORT, () => console.log("✅ 起動: http://localhost:" + PORT));
+app.listen(PORT, () => console.log("✅ 起動: http://localhost:" + PORT + "/api/users"));
 
 
 //JSでDBに干渉できるようになった。やべーやつ。メソッドの引数にそのままSQL文を書くだけで実行できる。
@@ -43,8 +40,7 @@ app.post("/api/users", (req, res) => {
   // const sql =
   //   `INSERT INTO users (name, message) 
   //    VALUES ('${name}', '${message}')`; //↓がSQLインジェクション対策してあるバージョン
-  const sql =
-    "INSERT INTO users (name, message) VALUES ($1, $2)";
+  const sql = "INSERT INTO users (name, message) VALUES ($1, $2)";
 
   // pool.query(sql) //↓がSQLインジェクション対策してあるバージョン
   pool.query(sql, [name, message])
@@ -56,5 +52,64 @@ app.post("/api/users", (req, res) => {
       //500番台のエラーコード。サーバーの内部処理でエラーが発生した場合に返す
       // 例：データベース接続に失敗した
       // 例：サーバー側のプログラムが例外を投げた
+    });
+});
+
+//③Read（データの取得）
+app.get("/api/users", (req, res) => {
+  //  res.send("ここでユーザー一覧を返す予定です");
+  const sql = "SELECT * FROM users" //JSの中でSQL文を書く際、末尾に";"は基本不要
+
+  pool.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch((err) => {
+      console.error("DBエラー:", err);
+      res.status(500).json({ ok: false, error: "DBエラーが発生しました" });
+    });
+});
+
+//④Update（データ更新）
+app.put("/api/users/:id", (req, res) => {
+  const id = req.params.id;
+  const { name, message } = req.body;
+  console.log("更新対象のID:", id);
+
+  //DB更新のためのSQL
+  // const sql = "UPDATE users SET name = '" + name + "', message = '" + message + "' WHERE id = " + id;
+  const sql = "UPDATE users SET name = $1, message = $2 WHERE id = $3 RETURNING *"; //SQLインジェクション対策var.
+  const values = [name, message, id];
+
+  //poolを使って実際にDBを更新する
+  pool.query(sql, values)
+    .then(() => {
+      res.json({ 
+        ok: true, id, name, message 
+      });
+      // res.send("ID " + id + " を更新します");
+    })
+
+
+  //↑の  該当するIDが見つからなかった場合の分岐処理を追加したvar.
+  // .then((result) => {
+  //     if (result.rows.length === 0) {
+  //       // 該当するIDが見つからなかった場合
+  //       res.status(404).json({ ok: false, error: "指定されたIDが見つかりません" });
+  //     } else {
+  //       // 更新成功
+  //       const updatedUser = result.rows[0];
+  //       res.json({ 
+  //         ok: true, 
+  //         id: updatedUser.id, 
+  //         name: updatedUser.name, 
+  //         message: updatedUser.message 
+  //       });
+  //     }
+  //   })
+
+    .catch((err) => {
+      console.error("更新エラー:", err);
+      res.status(500).json({ ok: false, error: "更新に失敗しました" });
     });
 });

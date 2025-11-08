@@ -56,6 +56,8 @@ pool.query(sql, [name, message, id])
 フロントに「更新フォーム」を追加（ID・名前・メッセージ）
 fetch() でPUTリクエスト → 結果を画面に表示する
 ---
+**11082018 Update（データ更新）まで 済 次回 Delete（データ削除）から**
+
 5. ## Delete（データ削除）
 やること
 APIに /api/users/:id のDELETEルートを作る

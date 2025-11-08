@@ -3,7 +3,8 @@ label {
   margin-top: 8px;
 }
 
-input, textarea {
+input,
+textarea {
   display: block;
   margin-top: 4px;
 }

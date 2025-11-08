@@ -81,35 +81,50 @@ app.put("/api/users/:id", (req, res) => {
   const sql = "UPDATE users SET name = $1, message = $2 WHERE id = $3 RETURNING *"; //SQLインジェクション対策var.
   const values = [name, message, id];
 
-  //poolを使って実際にDBを更新する
+  //poolを使ってDBを更新する
   pool.query(sql, values)
     .then(() => {
-      res.json({ 
-        ok: true, id, name, message 
+      res.json({
+        ok: true, id, name, message
       });
       // res.send("ID " + id + " を更新します");
     })
 
 
-  //↑の  該当するIDが見つからなかった場合の分岐処理を追加したvar.
-  // .then((result) => {
-  //     if (result.rows.length === 0) {
-  //       // 該当するIDが見つからなかった場合
-  //       res.status(404).json({ ok: false, error: "指定されたIDが見つかりません" });
-  //     } else {
-  //       // 更新成功
-  //       const updatedUser = result.rows[0];
-  //       res.json({ 
-  //         ok: true, 
-  //         id: updatedUser.id, 
-  //         name: updatedUser.name, 
-  //         message: updatedUser.message 
-  //       });
-  //     }
-  //   })
+    //↑の  該当するIDが見つからなかった場合の分岐処理を追加したvar.
+    // .then((result) => {
+    //     if (result.rows.length === 0) {
+    //       // 該当するIDが見つからなかった場合
+    //       res.status(404).json({ ok: false, error: "指定されたIDが見つかりません" });
+    //     } else {
+    //       // 更新成功
+    //       const updatedUser = result.rows[0];
+    //       res.json({ 
+    //         ok: true, 
+    //         id: updatedUser.id, 
+    //         name: updatedUser.name, 
+    //         message: updatedUser.message 
+    //       });
+    //     }
+    //   })
 
     .catch((err) => {
       console.error("更新エラー:", err);
       res.status(500).json({ ok: false, error: "更新に失敗しました" });
+    });
+});
+
+//⑤Delete（データ削除）
+app.delete("/api/users/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "DELETE FROM users WHERE id = $1";
+
+  pool.query(sql, [id])
+    .then(() => {
+      res.json({ ok: true, id });
+    })
+    .catch(err => {
+      console.error("削除エラー:", err);
+      res.status(500).json({ ok: false, error: "削除に失敗しました" });
     });
 });

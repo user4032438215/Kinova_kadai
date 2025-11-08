@@ -2,6 +2,8 @@ const form = document.querySelector("form");
 const resultDiv = document.querySelector("#result");
 const loadBtn = document.querySelector("#loadBtn");
 const updateForm = document.querySelector("#updateForm");
+const deleteForm = document.querySelector("#deleteForm");
+
 
 
 //データの取得に関するaddEventListener
@@ -108,3 +110,24 @@ form.addEventListener("submit", (event) => {
 });
 
 
+//データの削除に関するaddEventListener
+deleteForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const idValue = deleteForm.querySelector("input[name='id']").value;
+  const url = "http://localhost:3000/api/users";
+  const targetUrl = url + "/" + idValue; // IDをURLに結合
+
+  fetch(targetUrl, {
+    method: "DELETE"
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("削除結果:", data);
+      resultDiv.innerHTML = "🗑️ 削除完了: ID " + data.id;
+    })
+    .catch(err => {
+      console.error("削除エラー:", err);
+      resultDiv.innerText = "エラーが発生しました: " + err;
+    });
+});

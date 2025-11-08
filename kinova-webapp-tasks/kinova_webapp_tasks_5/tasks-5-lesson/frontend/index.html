@@ -10,21 +10,27 @@
 <body>
   <!-- frontend/index.html -->
   <form id="userForm">
-    <label>名前: <input type="text" name="name" required /></label><br />
+    <label>名前: <input type="text" name="name" required /></label>
     <label>メッセージ: <textarea name="message" required></textarea></label><br />
     <button type="submit">追加（Create）</button>
-  </form>
-
-  <!-- 新しい取得ボタン -->
-  <button id="loadBtn" type="button">データを取得</button>
+  </form><br />
 
   <!-- 更新フォーム -->
   <form id="updateForm" class="mt-4">
-    <label>ID: <input type="number" name="id" /></label><br />
-    <label>名前: <input type="text" name="name" /></label><br />
-    <label>メッセージ: <textarea name="message"></textarea></label><br />
+    <label>ID: <input type="number" name="id" /></label>
+    <label>名前: <input type="text" name="name" /></label>
+    <label>メッセージ: <textarea name="message"></textarea></label>
     <button type="submit">更新</button>
-  </form>
+  </form><br />
+
+  <!-- 削除フォーム -->
+  <form id="deleteForm" class="mt-4">
+    <label>削除するID: <input type="number" name="id" /></label>
+    <button type="submit">削除</button>
+  </form><br />
+
+  <!-- 新しい取得ボタン -->
+  <button id="loadBtn" type="button">データを取得</button>
 
   <!-- 結果表示エリア -->
   <div id="result">ここに結果が表示されます</div>

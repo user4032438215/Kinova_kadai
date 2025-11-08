@@ -2,11 +2,13 @@
 
 # 課題 1
 Node.js から PostgreSQL に接続するための準備をしてください。
+>npm install express Express導入 済
+>npm install pg pgパッケージ導入 済
 
 ■ 実装する内容
-1. サーバーコード（index.js）に pg パッケージを読み込む
-2. PostgreSQL 接続用の Pool インスタンスを作成する
-3. 接続情報を設定する
+1. サーバーコード（index.js）に pg パッケージを読み込む 済
+2. PostgreSQL 接続用の Pool インスタンスを作成する 済
+3. 接続情報を設定する 済
 ```
 user: "postgres"
 host: "localhost"
@@ -22,7 +24,8 @@ port: 5432
 3. 接続情報（ユーザー名・パスワードなど）を設定する
 目的：
 → Node.jsからPostgreSQLに命令を送れるようにする
----
+--- 
+11090103 済
 
 # 課題 2
 フロントエンドから送信された本の情報をデータベースに保存する API を作成してください。

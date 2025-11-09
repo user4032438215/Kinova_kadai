@@ -45,39 +45,40 @@ loadBtn.addEventListener("click", () => {
 });
 
 
-// //データの更新に関するaddEventListener
-// updateForm.addEventListener("submit", (event) => {
-//   event.preventDefault();
+//データの更新に関するaddEventListener
+updateForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-//   const idValue = updateForm.querySelector("input[name='id']").value;
-//   const nameValue = updateForm.querySelector("input[name='name']").value;
-//   const messageValue = updateForm.querySelector("textarea[name='message']").value;
+  const idValue = updateForm.querySelector("input[name='id']").value;
+  const titleValue = updateForm.querySelector("input[name='title']").value;
+  const authorValue = updateForm.querySelector("input[name='author']").value;
+  const priceValue = updateForm.querySelector("input[name='price']").value;
 
+  const url = "http://localhost:3000/api/books";
+  const targetUrl = url + "/" + idValue;
 
-//   const url = "http://localhost:3000/api/users";
-//   const targetUrl = url + "/" + idValue;
+  fetch(targetUrl, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title: titleValue, author: authorValue, price: priceValue })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("更新結果:", data);
+      resultDiv.innerHTML =
+        " 更新成功! <br> ID: " + data.id +
+        " <br> 新しいタイトル: " + data.title +
+        " <br> 新しい著者名: " + data.author +
+        " <br> 新しい価格: " + data.price;
+    })
+    .catch(err => {
+      console.error("更新エラー:", err);
+      resultDiv.innerText = "エラーが発生しました: " + err;
+    });
 
-//   fetch(targetUrl, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ name: nameValue, message: messageValue })
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log("更新結果:", data);
-//       resultDiv.innerHTML =
-//         " 更新成功! <br> ID: " + data.id +
-//         " <br> 名前: " + data.name +
-//         " <br> メッセージ: " + data.message;
-//     })
-//     .catch(err => {
-//       console.error("更新エラー:", err);
-//       resultDiv.innerText = "エラーが発生しました: " + err;
-//     });
-
-//   // console.log("📝 更新フォームが送信されました");
-//   console.log("ID:", idValue, "名前:", nameValue, "メッセージ:", messageValue);
-// });
+  console.log("📝 更新フォームが送信されました");
+  console.log("ID:", idValue, "新しいタイトル:", titleValue, "新しい著者名:", authorValue, "新しい価格:", priceValue);
+});
 
 
 //データの送信に関するaddEventListener
@@ -110,24 +111,24 @@ form.addEventListener("submit", (event) => {
 });
 
 
-// //データの削除に関するaddEventListener
-// deleteForm.addEventListener("submit", (event) => {
-//   event.preventDefault();
+//データの削除に関するaddEventListener
+deleteForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-//   const idValue = deleteForm.querySelector("input[name='id']").value;
-//   const url = "http://localhost:3000/api/users";
-//   const targetUrl = url + "/" + idValue; // IDをURLに結合
+  const idValue = deleteForm.querySelector("input[name='id']").value;
+  const url = "http://localhost:3000/api/books";
+  const targetUrl = url + "/" + idValue; // IDをURLに結合
 
-//   fetch(targetUrl, {
-//     method: "DELETE"
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log("削除結果:", data);
-//       resultDiv.innerHTML = "🗑️ 削除完了: ID " + data.id;
-//     })
-//     .catch(err => {
-//       console.error("削除エラー:", err);
-//       resultDiv.innerText = "エラーが発生しました: " + err;
-//     });
-// });
+  fetch(targetUrl, {
+    method: "DELETE"
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("削除結果:", data);
+      resultDiv.innerHTML = "🗑️ 削除完了: ID " + data.id;
+    })
+    .catch(err => {
+      console.error("削除エラー:", err);
+      resultDiv.innerText = "エラーが発生しました: " + err;
+    });
+});

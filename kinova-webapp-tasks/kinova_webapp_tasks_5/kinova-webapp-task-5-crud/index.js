@@ -84,3 +84,43 @@ app.get("/api/books", (req, res) => {
       res.status(500).json({ ok: false, error: "DBエラーが発生しました" });
     });
 });
+
+//Update（データ更新）
+app.put("/api/books/:id", (req, res) => {
+  const id = req.params.id; //Expressではルートパラメーターはreq.paramsで取得可能
+  const { title, author, price } = req.body; //分割代入
+  console.log("更新対象のID:", id);
+
+    if (!title || !author || price == null) {
+    return res.status(400).json({ ok: false, error: "全ての項目を入力してください" });
+  }
+
+  //DB更新のためのSQL
+  const sql = "UPDATE books SET title = $1, author = $2, price = $3 WHERE id = $4 RETURNING *"; //SQLインジェクション対策var.
+  const values = [title, author, price, id];
+
+  //poolを使ってDBを更新する
+  pool.query(sql, values)
+    .then((result) => {
+      res.json({ book: { title, author, price } }); //課題要件を満たしているか？
+    })
+    .catch((err) => {
+      console.error("更新エラー:", err);
+      res.status(500).json({ ok: false, error: "更新に失敗しました" });
+    });
+});
+
+//Delete（データ削除）
+app.delete("/api/books/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "DELETE FROM books WHERE id = $1";
+
+  pool.query(sql, [id])
+    .then(() => {
+      res.json({ ok: true, id });
+    })
+    .catch(err => {
+      console.error("削除エラー:", err);
+      res.status(500).json({ ok: false, error: "削除に失敗しました" });
+    });
+});

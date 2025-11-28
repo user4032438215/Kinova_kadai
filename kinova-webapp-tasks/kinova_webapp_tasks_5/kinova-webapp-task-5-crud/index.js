@@ -117,7 +117,7 @@ app.delete("/api/books/:id", (req, res) => {
 
   pool.query(sql, [id])
     .then(() => {
-      res.json({ ok: true, id });
+      res.json({ ok: true });
     })
     .catch(err => {
       console.error("削除エラー:", err);

@@ -106,7 +106,7 @@ form.addEventListener("submit", (event) => {
       resultDiv.innerText = "エラーが発生しました: " + err;
     });
   console.log("headers（Content-Type: application/json）を付けました。");
-  
+
 
 });
 
@@ -125,7 +125,7 @@ deleteForm.addEventListener("submit", (event) => {
     .then(res => res.json())
     .then(data => {
       console.log("削除結果:", data);
-      resultDiv.innerHTML = "🗑️ 削除完了: ID " + data.id;
+      resultDiv.innerHTML = "🗑️ 削除しました";
     })
     .catch(err => {
       console.error("削除エラー:", err);
